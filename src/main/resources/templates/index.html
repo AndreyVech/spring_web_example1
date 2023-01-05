@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:switch="${persons}">
+    <h2 th:case="null">
+        Persons not found
+    </h2>
+    <div th:case="*">
+        <h2>
+            Persons
+        </h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${persons}">
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.email}"></td>
+                <td><a th:href="@{/edit/{id}(id=${person.id})}"/>EDIT</a></td>
+                <td><a th:href="@{/delete/{id}(id=${person.id})}"/>DELETE</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<a href="/signup">Добавить</a>
+</body>
+</html>
